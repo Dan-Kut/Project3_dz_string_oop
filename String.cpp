@@ -4,6 +4,12 @@
 using namespace std;
 
 
+int String::amount_elements = 0;
+
+int String::getAmountOfElements()
+{
+	return amount_elements;
+}
 
 int String::MyStrLen()
 {
@@ -19,6 +25,15 @@ int String::MyStrLen()
 	return num;
 }
 
+String::String(const String& str)
+{
+	this->size = str.size;
+	this->str = new char[size+1];
+	strcpy_s(this->str, size + 1, str.str);
+	this->str[size] = '\0';
+	amount_elements++;
+}
+
 String::String(char* str, int size)
 {
 	if (str == nullptr && size <= 0)
@@ -31,7 +46,9 @@ String::String(char* str, int size)
 		this->size = size;
 		this->str = new char[size + 1];
 		strcpy_s(this->str, size + 1, str);
+		this->str[size] = '\0';
 	}
+	amount_elements++;
 }
 
 String::String(int size)
@@ -42,6 +59,7 @@ String::String(int size)
 		str = new char[size + 1];
 		str[size] = '\0';
 	}
+	amount_elements++;
 }
 
 String::String()
@@ -49,6 +67,7 @@ String::String()
 	size = 80;
 	str = new char[size + 1];
 	str[size] = '\0';
+	amount_elements++;
 }
 
 String::~String()
