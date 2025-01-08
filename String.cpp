@@ -27,11 +27,18 @@ int String::MyStrLen()
 
 String::String(const String& str)
 {
-	this->size = str.size;
-	this->str = new char[size+1];
-	strcpy_s(this->str, size + 1, str.str);
-	this->str[size] = '\0';
-	amount_elements++;
+	if (str.str != nullptr && str.size >= 0)
+	{
+		this->size = str.size;
+		this->str = new char[size + 1];
+		strcpy_s(this->str, size + 1, str.str);
+		this->str[size] = '\0';
+		amount_elements++;
+	}
+	else
+	{
+		cout << "error";
+	}
 }
 
 String::String(char* str, int size)
